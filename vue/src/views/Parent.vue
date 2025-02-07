@@ -12,11 +12,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import ProductList from './views/ProductList.vue'
+import ProductList from '@/views/ProductList.vue'
 
-export default defineComponent({
-  name: 'App',
+export default {
+  name: 'Parent',
   components: {
     ProductList,
   },
@@ -43,7 +42,7 @@ export default defineComponent({
       this.products.splice(index, 1)
     },
   },
-})
+}
 </script>
 
 <style scoped>
