@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <h1>ShopRite</h1>
+
     <div class="site">
       <h2>Products</h2>
+      <ProductList :products="products" @addToCart="addToCart" />
 
-      <ProductList :products="products" @deleteProduct="deleteProduct" />
-
-      <button @click="addProduct">Add Product</button>
+      <h2>Shopping Cart</h2>
+      <ul>
+        <li v-for="(item, index) in cart" :key="index">
+          {{ item.name }} - ${{ item.price.toFixed(2) }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -22,24 +27,31 @@ export default {
   data() {
     return {
       products: [
-        { name: 'Apple', price: 1.99, description: 'Fresh red apples' },
-        { name: 'Banana', price: 0.99, description: 'Ripe bananas' },
-        { name: 'Orange', price: 1.29, description: 'Sweet oranges' },
+        {
+          name: 'Apple',
+          price: 1.99,
+          description: 'Fresh red apples',
+          imageUrl: '/images/apple.jpg',
+        },
+        {
+          name: 'Banana',
+          price: 0.99,
+          description: 'Ripe bananas',
+          imageUrl: '/images/banana.jpg',
+        },
+        {
+          name: 'Orange',
+          price: 1.29,
+          description: 'Sweet oranges',
+          imageUrl: '/images/orange.jpg',
+        },
       ],
+      cart: [],
     }
   },
   methods: {
-    addProduct() {
-      const randomProduct = {
-        name: `Product ${this.products.length + 1}`,
-        price: parseFloat((Math.random() * 10).toFixed(2)),
-        description: 'A new random product',
-      }
-      this.products.push(randomProduct)
-    },
-
-    deleteProduct(index) {
-      this.products.splice(index, 1)
+    addToCart(product) {
+      this.cart.push(product)
     },
   },
 }
