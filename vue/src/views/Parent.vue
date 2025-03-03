@@ -3,20 +3,31 @@
     <h1>ShopRite</h1>
 
     <div class="site">
-      <h2>Products</h2>
-      <ProductList :products="products" @addToCart="addToCart" />
+      <div class="product-list">
+        <h2>Products</h2>
+        <ProductList :products="products" @addToCart="addToCart" />
+      </div>
 
-      <h2>Shopping Cart</h2>
-      <ul>
-        <li v-for="(item, index) in cart" :key="index">
-          {{ item.name }} - ${{ item.price.toFixed(2) }}
-        </li>
-      </ul>
+      <div class="shopping-cart">
+        <h2>Shopping Cart</h2>
+        <ul>
+          <li v-for="(item, index) in cart" :key="index">
+            {{ item.name }} - ${{ item.price.toFixed(2) }}
+          </li>
+        </ul>
+
+        <p v-if="cart.length > 0">
+          <strong>Total: ${{ cartTotal.toFixed(2) }}</strong>
+        </p>
+
+        <button v-if="cart.length > 0" @click="removeAllFromCart">Remove Everything</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref, computed } from 'vue'
 import ProductList from '@/views/ProductList.vue'
 
 export default {
@@ -24,42 +35,64 @@ export default {
   components: {
     ProductList,
   },
-  data() {
-    return {
-      products: [
-        {
-          name: 'Apple',
-          price: 1.99,
-          description: 'Fresh red apples',
-          imageUrl: '/images/apple.jpg',
-        },
-        {
-          name: 'Banana',
-          price: 0.99,
-          description: 'Ripe bananas',
-          imageUrl: '/images/banana.jpg',
-        },
-        {
-          name: 'Orange',
-          price: 1.29,
-          description: 'Sweet oranges',
-          imageUrl: '/images/orange.jpg',
-        },
-      ],
-      cart: [],
+  setup() {
+    const products = ref([
+      {
+        name: 'Apple',
+        price: 1.99,
+        description: 'Fresh Red Apple',
+        imageUrl: 'public/apple.jpg',
+      },
+      {
+        name: 'Banana',
+        price: 0.99,
+        description: 'Ripe Banana',
+        imageUrl: 'public/banana.jpg',
+      },
+      {
+        name: 'Orange',
+        price: 1.29,
+        description: 'Sweet Orange',
+        imageUrl: 'public/orange.jpg',
+      },
+    ])
+
+    const cart = ref([])
+
+    const addToCart = (product) => {
+      cart.value.push(product)
     }
-  },
-  methods: {
-    addToCart(product) {
-      this.cart.push(product)
-    },
+
+    const removeAllFromCart = () => {
+      cart.value = []
+    }
+
+    const cartTotal = computed(() => {
+      return cart.value.reduce((total, item) => total + item.price, 0)
+    })
+
+    return {
+      products,
+      cart,
+      addToCart,
+      removeAllFromCart,
+      cartTotal,
+    }
   },
 }
 </script>
 
 <style scoped>
 .site {
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
+}
+
+.product-list,
+.shopping-cart {
+  flex: 1;
+  margin: 0 20px;
 }
 
 button {
