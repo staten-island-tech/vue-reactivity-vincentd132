@@ -41,19 +41,55 @@ export default {
         name: 'Apple',
         price: 1.99,
         description: 'Fresh Red Apple',
-        imageUrl: 'public/apple.jpg',
+        imageUrl: '/apple.jpg',
       },
       {
         name: 'Banana',
         price: 0.99,
         description: 'Ripe Banana',
-        imageUrl: 'public/banana.jpg',
+        imageUrl: '/banana.jpg',
       },
       {
         name: 'Orange',
         price: 1.29,
         description: 'Sweet Orange',
-        imageUrl: 'public/orange.jpg',
+        imageUrl: '/orange.jpg',
+      },
+      {
+        name: 'Blueberry',
+        price: 1.69,
+        description: 'Big Blueberry',
+        imageUrl: '/blue.jpg',
+      },
+      {
+        name: 'Grape',
+        price: 2.29,
+        description: 'Sweet Grape',
+        imageUrl: '/grape.jpg',
+      },
+      {
+        name: 'Pear',
+        price: 122.29,
+        description: 'Asian Pear',
+        imageUrl: '/pear.jpg',
+      },
+      {
+        name: 'Strawberry',
+        price: 1.99,
+        description: 'Sweet Berry',
+        imageUrl: '/strawberry.jpg',
+      },
+      {
+        name: 'Pineapple',
+        price: 55.29,
+        description: 'Sweet Pineapple',
+        imageUrl: '/pine.jpg',
+      },
+      {
+        name: 'Raspberry',
+        price: 0.29,
+        description: 'Sweet Berry',
+        imageUrl: '/rasp.jpg',
       },
     ])
 
@@ -87,6 +123,8 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  flex-wrap: wrap;
+  width: 50%;
 }
 
 .product-list,
