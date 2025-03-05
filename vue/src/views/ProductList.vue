@@ -1,63 +1,54 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="(product, index) in products" :key="index" class="product-card">
-        <img :src="product.imageUrl" alt="product.name" class="product-image" />
-        <div class="product-info">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-          <p>
-            <strong>${{ product.price.toFixed(2) }}</strong>
-          </p>
-          <button @click="addToCart(product)">Add to Cart</button>
-        </div>
-      </li>
-    </ul>
-  </div>
+  <ul>
+    <li v-for="(product, index) in products" :key="index" class="product-card">
+      <img :src="product.imageUrl" alt="product.name" class="product-image" />
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>
+          <strong>${{ product.price.toFixed(2) }}</strong>
+        </p>
+        <button @click="addToCart(product)">Add to Cart</button>
+      </div>
+    </li>
+  </ul>
 </template>
 
-<script>
-export default {
-  props: {
-    products: Array,
+<script setup>
+import { defineProps, defineEmits } from 'vue'
+
+const props = defineProps({
+  products: {
+    type: Array,
+    required: true,
   },
-  methods: {
-    addToCart(product) {
-      this.$emit('addToCart', product)
-    },
-  },
+})
+
+const emit = defineEmits()
+
+const addToCart = (product) => {
+  emit('addToCart', product)
 }
 </script>
 
 <style scoped>
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 0;
-  list-style-type: none;
-}
-
 .product-card {
   display: flex;
   flex-direction: column;
   margin: 0;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px;
   background-color: #f9f9f9;
-  transition: box-shadow 0.3s ease;
-}
-
-.product-card:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  height: auto;
 }
 
 .product-image {
   width: 100%;
-  height: 200px;
+  height: 150px;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .product-info {
@@ -65,15 +56,39 @@ export default {
 }
 
 .product-info h3 {
-  margin: 10px 0;
-  font-size: 1.2rem;
+  margin: 5px 0;
+  font-size: 1.1rem;
 }
 
 .product-info p {
   margin: 5px 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
+}
+.site {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  flex-wrap: wrap;
 }
 
+.shopping-cart {
+  flex: 0 0 30%;
+  margin-left: 20px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
 button {
   background-color: #4caf50;
   color: white;
