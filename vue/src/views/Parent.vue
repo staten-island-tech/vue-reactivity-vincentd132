@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>ShopRite</h1>
+    <h1>Fruits</h1>
 
     <div class="site">
       <div class="product-list">
