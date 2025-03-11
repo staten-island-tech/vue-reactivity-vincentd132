@@ -4,7 +4,7 @@
 
     <div class="site">
       <div class="product-list">
-        <h2>Products</h2>
+        <h2></h2>
         <ProductList :products="products" @addToCart="addToCart" />
       </div>
 
@@ -57,4 +57,55 @@ const cartTotal = computed(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+.site {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.product-list {
+  flex: 1;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.shopping-cart {
+  width: 200px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .site {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shopping-cart {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+</style>

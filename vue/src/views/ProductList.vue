@@ -1,6 +1,6 @@
 <template>
-  <ul>
-    <li v-for="(product, index) in products" :key="index" class="product-card">
+  <div class="product-grid">
+    <div v-for="(product, index) in products" :key="index" class="product-card">
       <img :src="product.imageUrl" alt="product.name" class="product-image" />
       <div class="product-info">
         <h3>{{ product.name }}</h3>
@@ -10,8 +10,8 @@
         </p>
         <button @click="addToCart(product)">Add to Cart</button>
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -32,79 +32,61 @@ const addToCart = (product) => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
 .product-card {
   display: flex;
   flex-direction: column;
-  margin: 0;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
+  border-radius: 6px;
+  padding: 10px;
   background-color: #f9f9f9;
-  width: 250px;
-  height: auto;
+  width: 90%;
 }
 
 .product-image {
   width: 100%;
-  height: 150px;
+  height: 120px;
   object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.product-info {
-  flex: 1;
+  margin-bottom: 8px;
 }
 
 .product-info h3 {
   margin: 5px 0;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
 }
 
 .product-info p {
-  margin: 5px 0;
-  font-size: 0.9rem;
-}
-.site {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  flex-wrap: wrap;
-}
-
-.shopping-cart {
-  flex: 0 0 30%;
-  margin-left: 20px;
+  margin: 3px 0;
+  font-size: 0.8rem;
 }
 
 button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 15px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 14px;
+  margin-top: 6px;
 }
 
-button:hover {
-  background-color: #45a049;
-}
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-button:hover {
-  background-color: #45a049;
-}
-
-button:focus {
-  outline: none;
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 </style>
